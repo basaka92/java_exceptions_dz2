@@ -1,0 +1,84 @@
+Задание 2
+try {
+   int d = 0;
+
+// Необходимо создать массив intArray (или получить его откуда-то ещё), либо с уже готовыми значениями, либо запросить конкретные данные у пользователя
+// Например:
+// int[] intArray = new int[]{1,2,3,4,5,6,7,8};
+
+   double catchedRes1 = intArray[8] / d;
+   System.out.println("catchedRes1 = " + catchedRes1);
+} catch (ArithmeticException e) {
+   System.out.println("Catching exception: " + e);
+}
+
+// Т.к. индекс элемента массива задаётся конкретным числом, обработка ошибки выхода за пределы массива возможна только с помощью try/catch.
+// catch (IndexOutOfBoundsException e) {
+//    System.out.println("Catching exception: " + e);
+// }
+
+// Т.к. переменная d всегда равна нулю, данный метод всегда будет выдавать ошибку деления на ноль, которую также можно обработать с помощью условия (без try/catch).
+// Но хорошо бы сделать переменную index, в которую пользователь вводит номер элемента массива и реализовать ввод переменной d,
+// а затем добавить проверку условием на ошибку выхода за границы массива.
+// Если конечно идея программы не в том, чтобы всегда выдавать ошибку...
+
+// if (index<0 || index>=intArray.length){
+//    System.out.println("Выход за пределы массива!");
+// } else if (d == 0) {
+//    System.out.println("Нельзя делить на ноль!");
+// }else{
+//   double catchedRes1 = intArray[index] / d;
+// }
+
+
+
+
+Задание 3
+
+// Не смысла в throws Exception, т.к. throws используется для метода в том случае,
+// если он может вызывать исключения, но не обрабатывает их сам (по крайней мере я так понимаю).
+
+public static void main(String[] args) throws Exception {
+   try {
+       int a = 90;
+       int b = 3;
+       System.out.println(a / b);
+       printSum(23, 234);
+       int[] abc = { 1, 2 };
+
+// Опять ошибка выхода за пределы массива, а также использование константы, а не переменной.
+// Соответственно либо обработка текущего варианта с помощью try/catch, либо использование некой переменной index и условия.
+
+       abc[3] = 9;
+
+// Первый блок catch отлавливает все ошибки, а значит нет смысла в последующих блоках.
+// Либо нужно оставлять только первый блок, либо удалять его и отлавливать конкретные ошибки (если необходимо, чтобы пользователь знал что именно не так).
+
+   } catch (Throwable ex) {
+       System.out.println("Что-то пошло не так...");
+   } catch (NullPointerException ex) {
+       System.out.println("Указатель не может указывать на null!");
+   } catch (IndexOutOfBoundsException ex) {
+       System.out.println("Массив выходит за пределы своего размера!");
+   }
+}
+
+// В этом конкретном примере также нет нужды отлавливать NullPointerException, и другие ошибки. Единственная ошибка, что здесь возникает IndexOutOfBoundsException.
+// Поэтому просто:
+//   catch (IndexOutOfBoundsException ex) {
+//       System.out.println("Массив выходит за пределы своего размера!");
+//   }
+
+
+
+// В методе printSum нет нужды выбрасывать исключение FileNotFoundException.
+
+public static void printSum(Integer a, Integer b) throws FileNotFoundException {
+   System.out.println(a + b);
+}
+
+// public static void printSum(Integer a, Integer b){
+//   System.out.println(a + b);
+// }
+
+
